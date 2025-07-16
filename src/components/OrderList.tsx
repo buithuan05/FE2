@@ -1,57 +1,61 @@
 import { useQuery } from "@tanstack/react-query";
-import { Table } from "antd";
+import { Table, Tag, Spin } from "antd";
 
 function OrderList() {
-  const fetchOrders = async () => {
-    const [orders, users, products] = await Promise.all([
-      fetch("http://localhost:3001/orders").then((res) => res.json()),
-      fetch("http://localhost:3001/users").then((res) => res.json()),
-      fetch("http://localhost:3001/products").then((res) => res.json()),
-    ]);
-
-    return orders.map((order: any) => ({
-      ...order,
-      userName: users.find((u: any) => u.id === order.userId)?.name || "Không rõ",
-      productName:
-        products.find((p: any) => p.id === order.productId)?.name || "Không rõ",
-    }));
-  };
-
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, error } = useQuery({
     queryKey: ["orders"],
-    queryFn: fetchOrders,
+    queryFn: async () => {
+  const [orders, users, products] = await Promise.all([
+    fetch("http://localhost:3001/orders").then((res) => res.json()),
+    fetch("http://localhost:3001/users").then((res) => res.json()),
+    fetch("http://localhost:3001/products").then((res) => res.json()),
+  ]);
+
+  return orders.map((order: any) => ({
+    ...order,
+    userName:
+      users.find((u: any) => Number(u.id) === Number(order.userId))?.name ||
+      "Không rõ",
+    productName:
+      products.find((p: any) => Number(p.id) === Number(order.productId))
+        ?.name || "Không rõ",
+  }));
+},
+
   });
 
   const columns = [
-    {
-      title: "ID",
-      dataIndex: "id",
-    },
-    {
-      title: "Người dùng",
-      dataIndex: "userName",
-    },
-    {
-      title: "Sản phẩm",
-      dataIndex: "productName",
-    },
-    {
-      title: "Số lượng",
-      dataIndex: "quantity",
-    },
+    { title: "ID", dataIndex: "id" },
+    { title: "Người dùng", dataIndex: "userName" },
+    { title: "Sản phẩm", dataIndex: "productName" },
+    { title: "Số lượng", dataIndex: "quantity" },
     {
       title: "Trạng thái",
       dataIndex: "status",
+      render: (status: string) => {
+        const colorMap: Record<string, string> = {
+          shipped: "green",
+          pending: "orange",
+          delivered: "blue",
+          cancelled: "red",
+        };
+        return <Tag color={colorMap[status] || "default"}>{status}</Tag>;
+      },
     },
   ];
 
+  if (isLoading) return <Spin />;
+  if (error) return <p style={{ color: "red" }}>Lỗi: {(error as Error).message}</p>;
+
   return (
-    <div>
+    <div style={{ padding: 24 }}>
+      <h2 style={{ color: "black" }}>Danh sách đơn hàng</h2>
       <Table
         dataSource={data}
         columns={columns}
-        rowKey={"id"}
-        loading={isLoading}
+        rowKey="id"
+        pagination={{ pageSize: 5 }}
+        locale={{ emptyText: "Không có đơn hàng nào" }}
       />
     </div>
   );

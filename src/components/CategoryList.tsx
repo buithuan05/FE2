@@ -25,6 +25,7 @@ function CategoryList() {
 
   return (
     <div>
+      <h2 style={{color: "black"}}>Danh mục</h2>
       <Table
         dataSource={data}
         columns={columns}

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Table } from "antd";
+import { Table, Tag } from "antd";
 
 function UserList() {
   const fetchUsers = async () => {
@@ -28,17 +28,23 @@ function UserList() {
     {
       title: "Trạng thái",
       dataIndex: "IsActive",
-      render: (active: boolean) => (active ? "Hoạt động" : "Bị khóa"),
+      render: (isActive: boolean) => (
+        <Tag color={isActive ? "green" : "red"}>
+          {isActive ? "Hoạt động" : "Ngừng hoạt động"}
+        </Tag>
+      ),
     },
   ];
 
   return (
     <div>
+      <h2 style={{ color: "black" }}>Danh sách người dùng</h2>
       <Table
         dataSource={data}
         columns={columns}
         rowKey={"id"}
         loading={isLoading}
+        pagination={{ pageSize: 5 }} 
       />
     </div>
   );

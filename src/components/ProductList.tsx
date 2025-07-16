@@ -53,6 +53,7 @@ function ProductList() {
 
   return (
     <div>
+      <h2 style={{color: "black"}}>Danh sách sản phẩm</h2>
       {isLoading ? (
         <Spin />
       ) : error ? (

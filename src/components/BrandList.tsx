@@ -25,6 +25,7 @@ function BrandList() {
 
   return (
     <div>
+      <h2 style={{color: "black"}}>Danh sách thương hiệu</h2>
       <Table
         dataSource={data}
         columns={columns}
