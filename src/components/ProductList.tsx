@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Image, Spin, Table } from "antd";
+import { Image, Spin, Table, Input } from "antd";
+import { Link } from "react-router-dom";
 
 interface Product {
   id: string;
@@ -10,6 +12,8 @@ interface Product {
 }
 
 function ProductList() {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const fetchProducts = async () => {
     const res = await fetch("http://localhost:3001/products");
     return res.json();
@@ -20,6 +24,10 @@ function ProductList() {
     queryFn: fetchProducts,
   });
 
+  const filteredData = data?.filter((product: Product) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   const columns = [
     {
       title: "ID",
@@ -28,6 +36,9 @@ function ProductList() {
     {
       title: "Name",
       dataIndex: "name",
+      render: (text: string, record: Product) => (
+        <Link to={`/products/${record.id}`}>{text}</Link>
+      ),
     },
     {
       title: "Price",
@@ -36,7 +47,7 @@ function ProductList() {
     {
       title: "Image",
       dataIndex: "image",
-      render: (image: string, record: Product, index: number) => (
+      render: (image: string, record: Product) => (
         <Image
           src={image}
           alt={record.name}
@@ -49,17 +60,37 @@ function ProductList() {
       title: "Description",
       dataIndex: "description",
     },
+    {
+      title: "Actions",
+      key: "actions",
+      render: (text: string, record: Product) => (
+        <Link to={`/products/${record.id}`}>View Details</Link>
+      ),
+    },
   ];
 
   return (
     <div>
-      <h2 style={{color: "black"}}>Danh sách sản phẩm</h2>
+      <h2 style={{ color: "black" }}>Danh sách sản phẩm</h2>
+
+      <Input.Search
+        placeholder="Tìm kiếm theo tên sản phẩm"
+        allowClear
+        onChange={(e) => setSearchTerm(e.target.value)}
+        style={{ width: 300, marginBottom: 16 }}
+      />
+
       {isLoading ? (
         <Spin />
       ) : error ? (
-        <p>Error: {error.message}</p>
+        <p style={{ color: "red" }}>Lỗi: {error.message}</p>
       ) : (
-        <Table dataSource={data} columns={columns} rowKey="id" />
+        <Table
+          dataSource={filteredData}
+          columns={columns}
+          rowKey="id"
+          pagination={{ pageSize: 5 }}
+        />
       )}
     </div>
   );
