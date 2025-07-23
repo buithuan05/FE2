@@ -7,6 +7,7 @@ function UserList() {
   const [searchParams, setSearchParams] = useSearchParams();
   const name = searchParams.get("name") || "";
   const [searchTerm, setSearchTerm] = useState(name);
+  const [pageSize, setPageSize] = useState(5);
 
   const fetchUsers = async () => {
     const res = await fetch(`http://localhost:3001/users?name_like=${name}`);
@@ -52,7 +53,7 @@ function UserList() {
   return (
     <div>
       <h2 style={{ color: "black" }}>Danh sách người dùng</h2>
-
+    
       <Space style={{ marginBottom: 16 }}>
         <Input
           placeholder="Nhập tên người dùng"
@@ -72,7 +73,11 @@ function UserList() {
         columns={columns}
         rowKey="id"
         loading={isLoading}
-        pagination={{ pageSize: 5 }}
+        pagination={{
+          pageSize: pageSize,
+          showSizeChanger: true,
+          onShowSizeChange: (_, newSize) => setPageSize(newSize),
+        }}
       />
     </div>
   );

@@ -6,6 +6,7 @@ import UserList from "./components/UserList";
 import OrderList from "./components/OrderList";
 import BrandList from "./components/BrandList";
 import DefaultLayout from "./layout/Header";
+import ProductCreate from "./components/ProductCreate";
 
 function App() {
   const router = createBrowserRouter([
@@ -16,6 +17,7 @@ function App() {
         { index: true, element: <Navigate to="/products" /> },
         { path: "products", element: <ProductList /> },
         { path: "products/:id", element: <ProductDetail /> }, 
+        { path: "products/create", element: <ProductCreate /> },
         { path: "categories", element: <CategoryList /> },
         { path: "users", element: <UserList /> },
         { path: "orders", element: <OrderList /> },

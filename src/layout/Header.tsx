@@ -7,7 +7,8 @@ const DefaultLayout = () => {
   const location = useLocation();
 
   const menuItems = [
-    { label: "Sản phẩm", path: "/products" },
+    { label: "Danh sách sản phẩm", path: "/products" },
+    { label: "Thêm sản phẩm", path: "/products/create" },
     { label: "Danh mục", path: "/categories" },
     { label: "Thương hiệu", path: "/brands" },
     { label: "Người dùng", path: "/users" },
