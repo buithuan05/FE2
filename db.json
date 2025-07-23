@@ -39,18 +39,18 @@
       "name": "Smart phone"
     },
     {
-      "id": "1",
+      "id": "2",
       "name": "Tablet"
     },
     {
-      "id": "1",
+      "id": "3",
       "name": "Laptop"
     }
   ],
   "users": [
     {
       "id": "1",
-      "name": "thuan",
+      "name": "user 1",
       "email": "user1@example.com",
       "IsActive": true
     },
