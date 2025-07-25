@@ -2,35 +2,43 @@
   "products": [
     {
       "id": "1",
-      "name": "Laptop",
-      "price": 1000,
-      "image": "https://nads.1cdn.vn/2024/11/22/74da3f39-759b-4f08-8850-4c8f2937e81a-1_mangeshdes.png"
-    },
-    {
-      "id": "2",
-      "name": "Phone",
-      "price": 500,
-      "image": "https://photo.znews.vn/w1200/Uploaded/mdf_eioxrd/2021_07_06/2.jpg"
-    },
-    {
-      "id": "3",
       "name": "Tablet",
       "price": 300,
       "image": "https://photo.znews.vn/w1200/Uploaded/mdf_eioxrd/2021_07_06/3.jpg"
     },
     {
-      "id": "935a",
-      "name": "Tên Sách Hiện Tại",
+      "id": "2",
+      "name": "Máy tính",
       "price": 2000000,
       "description": "sdsdsdsd",
       "image": "https://caodang.fpt.edu.vn/wp-content/uploads/87104554_2870617879663960_7616087389408067584_o.jpg"
     },
     {
-      "id": "70aa",
+      "id": "3",
       "name": "webnhap",
       "price": 3232323232,
       "description": "dfcasd",
       "image": "https://caodang.fpt.edu.vn/wp-content/uploads/FPT_Polytechnic_vtc8.jpeg"
+    },
+    {
+      "id": "4",
+      "name": "Điện thoại",
+      "price": 2000000,
+      "description": "sdsdsdsd",
+      "image": "https://images2.thanhnien.vn/528068263637045248/2024/1/25/e093e9cfc9027d6a142358d24d2ee350-65a11ac2af785880-17061562929701875684912.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Tai nghe",
+      "price": 5000000,
+      "description": "sdsdsdsd",
+      "image": "https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474111PXL/anh-dep-nhat-the-gioi-ve-thien-nhien_041753462.jpg"
+    },
+    {
+      "name": "webnhap",
+      "price": 20000,
+      "image": "#",
+      "id": "SJPR_HG"
     }
   ],
   "categories": [
@@ -58,13 +66,13 @@
       "id": "2",
       "name": "User 2",
       "email": "user2@example.com",
-      "IsActive": true
+      "IsActive": false
     },
     {
       "id": "3",
       "name": "User 3",
       "email": "user3@example.com",
-      "IsActive": false
+      "IsActive": true
     },
     {
       "id": "4",
@@ -138,73 +146,45 @@
   "orders": [
     {
       "id": "1",
-      "userId": 1,
-      "productId": 1,
-      "quantity": 2,
-      "status": "shipped"
-    },
-    {
-      "id": "2",
-      "userId": 2,
-      "productId": 2,
-      "quantity": 1,
-      "status": "pending"
-    },
-    {
-      "id": "3",
       "userId": 3,
       "productId": 3,
       "quantity": 5,
       "status": "delivered"
     },
     {
-      "id": "4",
-      "userId": 1,
-      "productId": 2,
-      "quantity": 3,
-      "status": "cancelled"
-    },
-    {
-      "id": "5",
+      "id": "1",
       "userId": 2,
-      "productId": 1,
-      "quantity": 1,
-      "status": "shipped"
-    },
-    {
-      "id": "6",
-      "userId": 3,
-      "productId": 2,
-      "quantity": 4,
-      "status": "pending"
-    },
-    {
-      "id": "7",
-      "userId": 1,
       "productId": 3,
       "quantity": 2,
       "status": "delivered"
     },
     {
-      "id": "8",
-      "userId": 2,
-      "productId": 1,
-      "quantity": 1,
-      "status": "shipped"
-    },
-    {
-      "id": "9",
-      "userId": 3,
-      "productId": 2,
-      "quantity": 3,
-      "status": "cancelled"
-    },
-    {
-      "id": "10",
-      "userId": 1,
+      "id": "3",
+      "userId": 5,
       "productId": 3,
       "quantity": 2,
       "status": "pending"
+    },
+    {
+      "id": "3",
+      "userId": 1,
+      "productId": 1,
+      "quantity": 2,
+      "status": "delivered"
+    },
+    {
+      "id": "3",
+      "userId": 9,
+      "productId": 5,
+      "quantity": 2,
+      "status": "shipped"
+    },
+    {
+      "id": "3",
+      "userId": 1,
+      "productId": 3,
+      "quantity": 2,
+      "status": "cancelled"
     }
   ]
 }

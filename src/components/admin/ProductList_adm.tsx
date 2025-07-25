@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Image, Spin, Table, Input } from "antd";
-import { Link } from "react-router-dom";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { Image, Spin, Table, Input, Button, Popconfirm, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 
 interface Product {
   id: string;
@@ -11,11 +11,14 @@ interface Product {
   description: string;
 }
 
-function ProductList() {
+function ProductList_adm() {
   const [searchTerm, setSearchTerm] = useState("");
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const fetchProducts = async () => {
     const res = await fetch("http://localhost:3001/products");
+    if (!res.ok) throw new Error("Failed to fetch products");
     return res.json();
   };
 
@@ -23,6 +26,20 @@ function ProductList() {
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
+
+  const handleDelete = async (id: string) => {
+    try {
+      const res = await fetch(`http://localhost:3001/products/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Xóa thất bại");
+
+      message.success("Đã xóa sản phẩm");
+      queryClient.invalidateQueries({ queryKey: ["products"] }); 
+    } catch (err) {
+      message.error("Lỗi khi xóa sản phẩm");
+    }
+  };
 
   const filteredData = data?.filter((product: Product) =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase())
@@ -63,8 +80,29 @@ function ProductList() {
     {
       title: "Actions",
       key: "actions",
-      render: (text: string, record: Product) => (
-        <Link to={`/products/${record.id}`}>View Details</Link>
+      render: (_: any, record: Product) => (
+        <div style={{ display: "flex", gap: "8px" }}>
+          <Button
+            type="link"
+            onClick={() => navigate(`/products/edit/${record.id}`)}
+          >
+            Sửa
+          </Button>
+
+          <Button
+        type="link"
+        danger
+        onClick={() => {
+          const confirmDelete = window.confirm("Bạn có chắc chắn muốn xóa?");
+          if (confirmDelete) {
+            handleDelete(record.id);
+          }
+        }}
+      >
+        Xóa
+      </Button>
+
+        </div>
       ),
     },
   ];
@@ -83,7 +121,7 @@ function ProductList() {
       {isLoading ? (
         <Spin />
       ) : error ? (
-        <p style={{ color: "red" }}>Lỗi: {error.message}</p>
+        <p style={{ color: "red" }}>Lỗi: {(error as Error).message}</p>
       ) : (
         <Table
           dataSource={filteredData}
@@ -96,4 +134,4 @@ function ProductList() {
   );
 }
 
-export default ProductList;
+export default ProductList_adm;

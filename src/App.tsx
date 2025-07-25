@@ -7,6 +7,8 @@ import OrderList from "./components/client/OrderList";
 import BrandList from "./components/client/BrandList";
 import DefaultLayout from "./layout/Header";
 import ProductCreate from "./components/admin/ProductCreate";
+import ProductList_adm from "./components/admin/ProductList_adm";
+import UserList_adm from "./components/admin/UserList_adm";
 
 function App() {
   const router = createBrowserRouter([
@@ -15,11 +17,11 @@ function App() {
       element: <DefaultLayout />,
       children: [
         { index: true, element: <Navigate to="/products" /> },
-        { path: "products", element: <ProductList /> },
+        { path: "products", element: <ProductList_adm /> },
         { path: "products/:id", element: <ProductDetail /> }, 
         { path: "products/create", element: <ProductCreate /> },
         { path: "categories", element: <CategoryList /> },
-        { path: "users", element: <UserList /> },
+        { path: "users", element: <UserList_adm /> },
         { path: "orders", element: <OrderList /> },
         { path: "brands", element: <BrandList /> },
       ],

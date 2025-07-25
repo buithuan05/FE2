@@ -11,7 +11,7 @@ const DefaultLayout = () => {
     { label: "Thêm sản phẩm", path: "/products/create" },
     { label: "Danh mục", path: "/categories" },
     { label: "Thương hiệu", path: "/brands" },
-    { label: "Người dùng", path: "/users" },
+    { label: "Người dùng", path: "/users?name=&page=1&pageSize=5" },
     { label: "Đơn hàng", path: "/orders" },
   ];
 

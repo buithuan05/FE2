@@ -1,9 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { Image, Spin } from "antd";
+import { Image, Spin, Card, Typography, Descriptions, Button } from "antd";
+
+const { Title, Paragraph } = Typography;
 
 function ProductDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const fetchProductDetail = async () => {
     const res = await fetch(`http://localhost:3001/products/${id}`);
@@ -17,17 +20,36 @@ function ProductDetail() {
     enabled: !!id,
   });
 
-  if (isLoading) return <Spin />;
+  if (isLoading) return <Spin style={{ display: "block", margin: "50px auto" }} />;
   if (error) return <p style={{ color: "red" }}>Lỗi: {error.message}</p>;
 
   return (
-    <div>
-      <h2>Chi tiết sản phẩm</h2>
-      <Image src={data.image} width={300} fallback="https://via.placeholder.com/300" />
-      <p><strong>ID:</strong> {data.id}</p>
-      <p><strong>Tên:</strong> {data.name}</p>
-      <p><strong>Giá:</strong> {data.price}</p>
-      <p><strong>Mô tả:</strong> {data.description}</p>
+    <div style={{ maxWidth: 800, margin: "0 auto", padding: 24 }}>
+      <Button onClick={() => navigate(-1)} style={{ marginBottom: 16 }}>
+        ← Quay lại
+      </Button>
+
+      <Card bordered style={{ boxShadow: "0 2px 8px rgba(0,0,0,0.1)" }}>
+        <div style={{ display: "flex", gap: 24 }}>
+          <Image
+            src={data.image}
+            width={300}
+            fallback="https://via.placeholder.com/300"
+            alt={data.name}
+            style={{ borderRadius: 8 }}
+          />
+          <div style={{ flex: 1 }}>
+            <Title level={3}>{data.name}</Title>
+            <Descriptions column={1} bordered size="middle">
+              <Descriptions.Item label="ID">{data.id}</Descriptions.Item>
+              <Descriptions.Item label="Giá">{data.price} đ</Descriptions.Item>
+              <Descriptions.Item label="Mô tả">
+                <Paragraph style={{ margin: 0 }}>{data.description}</Paragraph>
+              </Descriptions.Item>
+            </Descriptions>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }

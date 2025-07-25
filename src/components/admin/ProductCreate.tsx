@@ -70,5 +70,5 @@ const ProductCreate = () => {
     </div>
   );
 };
-
+  
 export default ProductCreate;
