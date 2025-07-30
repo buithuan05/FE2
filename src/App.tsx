@@ -6,9 +6,12 @@ import UserList from "./components/client/UserList";
 import OrderList from "./components/client/OrderList";
 import BrandList from "./components/client/BrandList";
 import DefaultLayout from "./layout/Header";
-import ProductCreate from "./components/admin/ProductCreate";
-import ProductList_adm from "./components/admin/ProductList_adm";
-import UserList_adm from "./components/admin/UserList_adm";
+import ProductCreate from "./components/admin/Product/ProductCreate_adm";
+import ProductList_adm from "./components/admin/Product/ProductList_adm";
+import UserList_adm from "./components/admin/User/UserList_adm";
+import ProductUpdate_adm from "./components/admin/Product/ProductUpdate_adm";
+import UserCreate_adm from "./components/admin/User/UserCreate_adm";
+import UserUpdate_adm from "./components/admin/User/UserUpdate_adm";
 
 function App() {
   const router = createBrowserRouter([
@@ -24,6 +27,9 @@ function App() {
         { path: "users", element: <UserList_adm /> },
         { path: "orders", element: <OrderList /> },
         { path: "brands", element: <BrandList /> },
+        { path: "products/update/:id", element: <ProductUpdate_adm /> },
+        { path: "users/create", element: <UserCreate_adm /> },
+        { path: "users/update/:id", element: <UserUpdate_adm /> },
       ],
     },
   ]);

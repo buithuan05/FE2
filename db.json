@@ -1,20 +1,15 @@
 {
   "products": [
     {
-      "id": "1",
-      "name": "Tablet",
-      "price": 300,
-      "image": "https://photo.znews.vn/w1200/Uploaded/mdf_eioxrd/2021_07_06/3.jpg"
-    },
-    {
-      "id": "2",
-      "name": "Máy tính",
+      "name": "Máy tính updated",
       "price": 2000000,
       "description": "sdsdsdsd",
-      "image": "https://caodang.fpt.edu.vn/wp-content/uploads/87104554_2870617879663960_7616087389408067584_o.jpg"
+      "image": "https://caodang.fpt.edu.vn/wp-content/uploads/87104554_2870617879663960_7616087389408067584_o.jpg",
+      "id": "2"
     },
     {
       "id": "3",
+      "categoryId": "1",
       "name": "webnhap",
       "price": 3232323232,
       "description": "dfcasd",
@@ -22,6 +17,7 @@
     },
     {
       "id": "4",
+      "categoryId": "3",
       "name": "Điện thoại",
       "price": 2000000,
       "description": "sdsdsdsd",
@@ -29,16 +25,25 @@
     },
     {
       "id": "5",
+      "categoryId": "1",
       "name": "Tai nghe",
       "price": 5000000,
       "description": "sdsdsdsd",
       "image": "https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/474111PXL/anh-dep-nhat-the-gioi-ve-thien-nhien_041753462.jpg"
     },
     {
+      "id": "SJPR_HG",
+      "categoryId": "2",
       "name": "webnhap",
-      "price": 20000,
       "image": "#",
-      "id": "SJPR_HG"
+      "price": 20000
+    },
+    {
+      "id": "cHbT2Vc",
+      "categoryId": "3",
+      "name": "Cấu trúc dữ liệu và giải thuật Updated",
+      "price": 500000,
+      "image": "https://photo.znews.vn/w1200/Uploaded/mdf_eioxrd/2021_07_06/3.jpg"
     }
   ],
   "categories": [
@@ -155,20 +160,6 @@
       "id": "1",
       "userId": 2,
       "productId": 3,
-      "quantity": 2,
-      "status": "delivered"
-    },
-    {
-      "id": "3",
-      "userId": 5,
-      "productId": 3,
-      "quantity": 2,
-      "status": "pending"
-    },
-    {
-      "id": "3",
-      "userId": 1,
-      "productId": 1,
       "quantity": 2,
       "status": "delivered"
     },

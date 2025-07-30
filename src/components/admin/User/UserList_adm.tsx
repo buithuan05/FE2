@@ -106,7 +106,7 @@ function UserList() {
       title: "Hành động",
       render: (_: any, record: any) => (
         <Space>
-          <Button type="link" href={`/users/edit/${record.id}`}>Sửa</Button>
+          <Button type="link" href={`/users/update/${record.id}`}>Sửa</Button>
           <Button
             type="link"
             danger

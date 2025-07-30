@@ -45,25 +45,20 @@ const DefaultLayout = () => {
       </Header>
 
       <Content
-  style={{
-    width: "100%",
-    marginTop: 64,
-    padding: "24px",
-    display: "flex",
-    justifyContent: "center",  // căn giữa ngang
-    alignItems: "flex-start",  // không căn giữa dọc
-    backgroundColor: "#f0f2f5",
-  }}
->
-  <div
-    style={{
-      width: "100%"
-    }}
-  >
-    <Outlet />
-  </div>
-</Content>
-
+        style={{
+          width: "100%",
+          marginTop: 64, // để tránh bị che bởi Header cố định
+          padding: "24px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-start",
+          backgroundColor: "#f0f2f5",
+        }}
+      >
+        <div style={{ width: "100%" }}>
+          <Outlet />
+        </div>
+      </Content>
     </Layout>
   );
 };

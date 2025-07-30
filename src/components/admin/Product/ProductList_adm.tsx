@@ -9,6 +9,7 @@ interface Product {
   price: number;
   image: string;
   description: string;
+  categoryId: string;
 }
 
 function ProductList_adm() {
@@ -21,11 +22,22 @@ function ProductList_adm() {
     if (!res.ok) throw new Error("Failed to fetch products");
     return res.json();
   };
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["products"],
     queryFn: fetchProducts,
   });
+
+  const fetchCategory = async () => {
+    const res = await fetch("http://localhost:3001/categories");
+    if (!res.ok) throw new Error("Failed to fetch categories");
+    return res.json();
+  };
+  const { data: categories } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategory,
+  });
+
+  
 
   const handleDelete = async (id: string) => {
     try {
@@ -58,6 +70,12 @@ function ProductList_adm() {
       ),
     },
     {
+  title: "Category",
+  render: (_: any, record: Product) =>
+    categories?.find((cat: any) => cat.id === record.categoryId)?.name || "Không rõ",
+}
+,
+    {
       title: "Price",
       dataIndex: "price",
     },
@@ -84,7 +102,7 @@ function ProductList_adm() {
         <div style={{ display: "flex", gap: "8px" }}>
           <Button
             type="link"
-            onClick={() => navigate(`/products/edit/${record.id}`)}
+            onClick={() => navigate(`/products/update/${record.id}`)}
           >
             Sửa
           </Button>
